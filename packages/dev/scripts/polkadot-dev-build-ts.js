@@ -10,15 +10,11 @@ const fs = require('fs');
 const mkdirp = require('mkdirp');
 const path = require('path');
 
-const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'png', 'svg', 'd.ts']
+const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'png', 'svg', 'd.ts', 'json']
   .map((ext) => `src/**/*.${ext}`)
   .concat('package.json');
 
 console.log('$ polkadot-dev-build-ts', process.argv.slice(2).join(' '));
-
-function buildWebpack () {
-  execSync('yarn polkadot-exec-webpack --config webpack.config.js --mode production');
-}
 
 async function buildBabel (dir) {
   await babel({
@@ -42,19 +38,12 @@ async function buildJs (dir) {
   if (!fs.existsSync(path.join(process.cwd(), '.skip-build'))) {
     const { name, version } = require(path.join(process.cwd(), './package.json'));
 
-    if (!name.startsWith('@polkadot/')) {
-      return;
-    }
-
     console.log(`*** ${name} ${version}`);
 
     mkdirp.sync('build');
 
-    if (fs.existsSync(path.join(process.cwd(), 'public'))) {
-      buildWebpack(dir);
-    } else {
-      await buildBabel(dir);
-    }
+
+    await buildBabel(dir);
 
     console.log();
   }

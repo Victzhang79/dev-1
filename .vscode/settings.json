@@ -6,6 +6,5 @@
   "eslint.validate": [
     "javascript",
     "typescript",
-    "typescriptreact"
   ]
 }

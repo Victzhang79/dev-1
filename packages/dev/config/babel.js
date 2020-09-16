@@ -26,8 +26,7 @@ module.exports = {
         node: '10'
       }
     }],
-    '@babel/preset-typescript',
-    '@babel/preset-react'
+    '@babel/preset-typescript'
   ]),
   plugins: resolver([
     // ordering important, decorators before class properties
@@ -44,7 +43,6 @@ module.exports = {
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-syntax-import-meta',
     '@babel/plugin-syntax-top-level-await',
-    'babel-plugin-styled-components',
     process.env.NODE_ENV === 'test' && '@polkadot/dev/config/babel-plugin-fix-istanbul'
   ])
 };
