@@ -3,11 +3,9 @@
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
-const babel = require('@babel/cli/lib/babel/dir').default;
 const copySync = require('./copySync');
 const execSync = require('./execSync');
 const fs = require('fs');
-const mkdirp = require('mkdirp');
 const path = require('path');
 
 const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'png', 'svg', 'd.ts', 'json']
@@ -16,34 +14,18 @@ const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'png', 'svg', 'd.ts', 'json']
 
 console.log('$ polkadot-dev-build-ts', process.argv.slice(2).join(' '));
 
-async function buildBabel (dir) {
-  await babel({
-    babelOptions: {
-      configFile: path.join(process.cwd(), '../../babel.config.js')
-    },
-    cliOptions: {
-      extensions: ['.ts', '.tsx'],
-      filenames: ['src'],
-      ignore: '**/*.d.ts',
-      outDir: path.join(process.cwd(), 'build')
-    }
-  });
-
+function copyFiles (dir) {
   [...CPX]
-    .concat(`../../build/${dir}/src/**/*.d.ts`, `../../build/packages/${dir}/src/**/*.d.ts`)
-    .forEach((src) => copySync(src, 'build'));
+    .forEach((src) => copySync(src, `../../build/${dir}/src`));
 }
 
-async function buildJs (dir) {
+function buildOtherfile (dir) {
   if (!fs.existsSync(path.join(process.cwd(), '.skip-build'))) {
     const { name, version } = require(path.join(process.cwd(), './package.json'));
 
     console.log(`*** ${name} ${version}`);
 
-    mkdirp.sync('build');
-
-
-    await buildBabel(dir);
+    copyFiles(dir);
 
     console.log();
   }
@@ -52,9 +34,10 @@ async function buildJs (dir) {
 async function main () {
   execSync('yarn polkadot-dev-clean-build');
 
-  process.chdir('packages');
 
-  execSync('tsc --emitDeclarationOnly --outdir ../build');
+  execSync('tsc --outdir ./build --project tsconfig.json');
+
+  process.chdir('packages');
 
   const dirs = fs
     .readdirSync('.')
@@ -63,7 +46,7 @@ async function main () {
   for (const dir of dirs) {
     process.chdir(dir);
 
-    await buildJs(dir);
+    buildOtherfile(dir);
 
     process.chdir('..');
   }
