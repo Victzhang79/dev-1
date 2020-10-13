@@ -22,10 +22,10 @@ const argv = require('yargs')
 const repo = `https://${process.env.GH_PAT}@github.com/${process.env.GITHUB_REPOSITORY}.git`;
 const hasLerna = fs.existsSync('lerna.json');
 
-console.log('$ polkadot-ci-ghact-build', process.argv.slice(2).join(' '));
+console.log('$ redspot-ci-ghact-build', process.argv.slice(2).join(' '));
 
 function runClean () {
-  execSync('yarn polkadot-dev-clean-build');
+  execSync('yarn redspot-dev-clean-build');
 }
 
 function runCheck () {
@@ -60,16 +60,16 @@ function lernaBump () {
 
   if (isBeta) {
     // if we have a beta version, just continue the stream of betas
-    execSync('yarn run polkadot-dev-version --type prerelease');
+    execSync('yarn run redspot-dev-version --type prerelease');
   } else if (argv['skip-beta']) {
     // don't allow beta versions
-    execSync('yarn polkadot-dev-version --type patch');
+    execSync('yarn redspot-dev-version --type patch');
   } else if (patch === '0') {
     // patch is .0, so publish this as an actual release (surely we did out job on beta)
-    execSync('yarn polkadot-dev-version --type patch');
+    execSync('yarn redspot-dev-version --type patch');
   } else if (patch === '1') {
     // continue with first new minor as beta
-    execSync('yarn polkadot-dev-version --type preminor');
+    execSync('yarn redspot-dev-version --type preminor');
   } else {
     // manual setting of version, make some changes so we can commit
     fs.appendFileSync(path.join(process.cwd(), '.123trigger'), lernaGetVersion());
@@ -183,7 +183,7 @@ skip-checks: true"`);
       ? `--assets ${process.env.GH_RELEASE_FILES}`
       : '';
 
-    execSync(`yarn polkadot-exec-ghrelease --draft ${files} --yes`);
+    execSync(`yarn redspot-exec-ghrelease --draft ${files} --yes`);
   }
 }
 

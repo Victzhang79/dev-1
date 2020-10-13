@@ -12,7 +12,7 @@ const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'png', 'svg', 'd.ts', 'json']
   .map((ext) => `src/**/*.${ext}`)
   .concat('package.json');
 
-console.log('$ polkadot-dev-build-ts', process.argv.slice(2).join(' '));
+console.log('$ redspot-dev-build-ts', process.argv.slice(2).join(' '));
 
 function copyFiles (dir) {
   [...CPX]
@@ -32,7 +32,7 @@ function buildOtherfile (dir) {
 }
 
 async function main () {
-  execSync('yarn polkadot-dev-clean-build');
+  execSync('yarn redspot-dev-clean-build');
 
 
   execSync('tsc --outdir ./build --project tsconfig.json');

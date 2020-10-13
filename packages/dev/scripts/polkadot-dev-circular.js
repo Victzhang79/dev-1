@@ -6,7 +6,7 @@
 const chalk = require('chalk');
 const madge = require('madge');
 
-console.log('$ polkadot-dev-circular', process.argv.slice(2).join(' '));
+console.log('$ redspot-dev-circular', process.argv.slice(2).join(' '));
 
 madge('./', { fileExtensions: ['ts', 'tsx'] })
   .then((res) => {

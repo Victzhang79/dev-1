@@ -6,7 +6,7 @@
 const fs = require('fs');
 const execSync = require('./execSync');
 
-console.log('$ polkadot-ci-ghpages-force', process.argv.slice(2).join(' '));
+console.log('$ redspot-ci-ghpages-force', process.argv.slice(2).join(' '));
 
 // ensure we are on master
 execSync('git checkout master');

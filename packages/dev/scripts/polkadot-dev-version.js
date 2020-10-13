@@ -20,7 +20,7 @@ const { type } = require('yargs')
 const lernaPath = path.join(process.cwd(), 'lerna.json');
 const pkgPath = path.join(process.cwd(), 'package.json');
 
-console.log('$ polkadot-dev-version', process.argv.slice(2).join(' '));
+console.log('$ redspot-dev-version', process.argv.slice(2).join(' '));
 
 const args = ['version', type]
   .concat(
@@ -30,7 +30,7 @@ const args = ['version', type]
   )
   .concat(['--yes', '--exact', '--no-git-tag-version', '--no-push', '--allow-branch', '"*"']);
 
-execSync(`yarn polkadot-exec-lerna ${args.join(' ')}`);
+execSync(`yarn redspot-exec-lerna ${args.join(' ')}`);
 
 if (fs.existsSync(lernaPath)) {
   const { version } = require(lernaPath);

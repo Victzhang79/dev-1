@@ -5,6 +5,6 @@
 
 const execSync = require('./execSync');
 
-console.log('$ polkadot-dev-run-prettier', process.argv.slice(2).join(' '));
+console.log('$ redspot-dev-run-prettier', process.argv.slice(2).join(' '));
 
-execSync(`yarn polkadot-exec-prettier --write ${__dirname}`);
+execSync(`yarn redspot-exec-prettier --write ${__dirname}`);
