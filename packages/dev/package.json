@@ -1,6 +1,6 @@
 {
   "name": "@redspot/dev-cli",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "A collection of shared CI scripts and development environment used by @polkadot projects",
   "bin": {
     "redspot-ci-ghact-build": "./scripts/polkadot-ci-ghact-build.js",
