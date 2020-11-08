@@ -1826,6 +1826,7 @@ __metadata:
     polkadot-exec-typedoc: ./scripts/polkadot-exec-typedoc.js
     polkadot-exec-vuepress: ./scripts/polkadot-exec-vuepress.js
     polkadot-exec-webpack: ./scripts/polkadot-exec-webpack.js
+    redspot-dev-build-tsc: ./scripts/redspot-dev-build-tsc.js
   languageName: unknown
   linkType: soft
 
