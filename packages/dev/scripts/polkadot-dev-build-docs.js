@@ -13,7 +13,7 @@ console.log('$ polkadot-dev-build-docs', process.argv.slice(2).join(' '));
 
 function buildTypedoc(docRoot) {
   fs.readdirSync('packages')
-    .map(dir => [path.join(process.cwd(), 'packages', dir), dir])
+    .map((dir) => [path.join(process.cwd(), 'packages', dir), dir])
     .filter(
       ([dir]) =>
         fs.statSync(dir).isDirectory() &&
@@ -38,7 +38,7 @@ function main() {
   if (fs.existsSync(path.join(process.cwd(), 'typedoc.js'))) {
     buildTypedoc(docRoot);
 
-    ['CHANGELOG.md', 'CONTRIBUTING.md'].forEach(file => copySync(file, docRoot));
+    ['CHANGELOG.md', 'CONTRIBUTING.md'].forEach((file) => copySync(file, docRoot));
   }
 }
 

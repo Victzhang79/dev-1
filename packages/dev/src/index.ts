@@ -16,7 +16,7 @@ function doCallback(fn: (a: string) => string): void {
 export const echo = (value: EchoString, start = 0, end?: number): string => {
   count++;
 
-  doCallback(a => a);
+  doCallback((a) => a);
 
   return `${count}: ${A}: ${value}`.substr(start, end);
 };

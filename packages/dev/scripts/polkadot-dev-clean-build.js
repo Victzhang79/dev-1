@@ -15,7 +15,7 @@ function getDirs(dir) {
 }
 
 function cleanDirs(dirs) {
-  dirs.forEach(dir => rimraf.sync(dir));
+  dirs.forEach((dir) => rimraf.sync(dir));
 }
 
 cleanDirs(getDirs(process.cwd()));
@@ -24,8 +24,8 @@ if (fs.existsSync(PKGS)) {
   cleanDirs(
     fs
       .readdirSync(PKGS)
-      .map(file => path.join(PKGS, file))
-      .filter(file => fs.statSync(file).isDirectory())
+      .map((file) => path.join(PKGS, file))
+      .filter((file) => fs.statSync(file).isDirectory())
       .reduce((arr, dir) => arr.concat(getDirs(dir)), [])
   );
 }

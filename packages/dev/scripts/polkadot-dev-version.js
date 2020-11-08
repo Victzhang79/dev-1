@@ -35,9 +35,9 @@ execSync(`yarn version ${type === 'pre' ? 'prerelease' : type}`);
 if (fs.existsSync('packages')) {
   const packages = fs
     .readdirSync('packages')
-    .map(dir => path.join(process.cwd(), 'packages', dir, 'package.json'))
-    .filter(pkgPath => fs.existsSync(pkgPath))
-    .map(pkgPath => [pkgPath, JSON.parse(fs.readFileSync(pkgPath, 'utf8'))]);
+    .map((dir) => path.join(process.cwd(), 'packages', dir, 'package.json'))
+    .filter((pkgPath) => fs.existsSync(pkgPath))
+    .map((pkgPath) => [pkgPath, JSON.parse(fs.readFileSync(pkgPath, 'utf8'))]);
   const others = packages.map(([, json]) => json.name);
   const { version } = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'));
 

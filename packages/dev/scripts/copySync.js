@@ -29,7 +29,7 @@ module.exports = function copySync(src, dst) {
       nodir: true,
       silent: true
     })
-    .forEach(src => {
+    .forEach((src) => {
       const dst = baseDir === '.' ? path.join(normalizedOutputDir, src) : src.replace(baseDir, normalizedOutputDir);
 
       if (dst !== src) {
