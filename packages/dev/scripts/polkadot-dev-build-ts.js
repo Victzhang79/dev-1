@@ -11,16 +11,16 @@ const copySync = require('./copySync');
 const execSync = require('./execSync');
 
 const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'png', 'svg', 'd.ts']
-  .map((ext) => `src/**/*.${ext}`)
+  .map(ext => `src/**/*.${ext}`)
   .concat('package.json');
 
 console.log('$ polkadot-dev-build-ts', process.argv.slice(2).join(' '));
 
-function buildWebpack () {
+function buildWebpack() {
   execSync('yarn polkadot-exec-webpack --config webpack.config.js --mode production');
 }
 
-async function buildBabel (dir) {
+async function buildBabel(dir) {
   await babel({
     babelOptions: {
       configFile: path.join(process.cwd(), '../../babel.config.js')
@@ -35,10 +35,10 @@ async function buildBabel (dir) {
 
   [...CPX]
     .concat(`../../build/${dir}/src/**/*.d.ts`, `../../build/packages/${dir}/src/**/*.d.ts`)
-    .forEach((src) => copySync(src, 'build'));
+    .forEach(src => copySync(src, 'build'));
 }
 
-async function buildJs (dir) {
+async function buildJs(dir) {
   if (!fs.existsSync(path.join(process.cwd(), '.skip-build'))) {
     const { name, version } = require(path.join(process.cwd(), './package.json'));
 
@@ -60,7 +60,7 @@ async function buildJs (dir) {
   }
 }
 
-async function main () {
+async function main() {
   execSync('yarn polkadot-dev-clean-build');
 
   process.chdir('packages');
@@ -69,7 +69,7 @@ async function main () {
 
   const dirs = fs
     .readdirSync('.')
-    .filter((dir) => fs.statSync(dir).isDirectory() && fs.existsSync(path.join(process.cwd(), dir, 'src')));
+    .filter(dir => fs.statSync(dir).isDirectory() && fs.existsSync(path.join(process.cwd(), dir, 'src')));
 
   for (const dir of dirs) {
     process.chdir(dir);
@@ -82,7 +82,7 @@ async function main () {
   process.chdir('..');
 }
 
-main().catch((error) => {
+main().catch(error => {
   console.error(error);
   process.exit(-1);
 });

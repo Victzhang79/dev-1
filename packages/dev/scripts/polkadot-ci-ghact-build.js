@@ -12,8 +12,7 @@ const argv = require('yargs')
       type: 'boolean'
     }
   })
-  .strict()
-  .argv;
+  .strict().argv;
 
 const copySync = require('./copySync');
 const execSync = require('./execSync');
@@ -22,15 +21,15 @@ const repo = `https://${process.env.GH_PAT}@github.com/${process.env.GITHUB_REPO
 
 console.log('$ polkadot-ci-ghact-build', process.argv.slice(2).join(' '));
 
-function runClean () {
+function runClean() {
   execSync('yarn polkadot-dev-clean-build');
 }
 
-function runCheck () {
+function runCheck() {
   execSync('yarn lint');
 }
 
-function runTest () {
+function runTest() {
   execSync('yarn test');
 
   // if [ -f "coverage/lcov.info" ] && [ -n "$COVERALLS_REPO_TOKEN" ]; then
@@ -40,29 +39,27 @@ function runTest () {
   // fi
 }
 
-function runBuild () {
+function runBuild() {
   execSync('yarn build');
 }
 
-function npmGetVersion () {
-  return JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf8')
-  ).version;
+function npmGetVersion() {
+  return JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf8')).version;
 }
 
-function npmSetup () {
+function npmSetup() {
   const registry = 'registry.npmjs.org';
 
   fs.writeFileSync(path.join(os.homedir(), '.npmrc'), `//${registry}/:_authToken=${process.env.NPM_TOKEN}`);
 }
 
-function npmPublish () {
+function npmPublish() {
   if (fs.existsSync('.skip-npm')) {
     return;
   }
 
   rimraf.sync('build/package.json');
-  ['LICENSE', 'README.md', 'package.json'].forEach((file) => copySync(file, 'build'));
+  ['LICENSE', 'README.md', 'package.json'].forEach(file => copySync(file, 'build'));
 
   process.chdir('build');
 
@@ -91,7 +88,7 @@ function npmPublish () {
   process.chdir('..');
 }
 
-function gitSetup () {
+function gitSetup() {
   execSync('git config push.default simple');
   execSync('git config merge.ours.driver true');
   execSync('git config user.name "Github Actions"');
@@ -99,10 +96,10 @@ function gitSetup () {
   execSync('git checkout master');
 }
 
-function gitBump () {
+function gitBump() {
   const currentVersion = npmGetVersion();
   const [version, tag] = currentVersion.split('-');
-  const [,, patch] = version.split('.');
+  const [, , patch] = version.split('.');
 
   if (tag) {
     // if we have a beta version, just continue the stream of betas
@@ -124,7 +121,7 @@ function gitBump () {
   execSync('git add --all .');
 }
 
-function gitPush () {
+function gitPush() {
   const version = npmGetVersion();
   let doGHRelease = false;
 
@@ -153,26 +150,25 @@ skip-checks: true"`);
   execSync(`git push ${repo} HEAD:${process.env.GITHUB_REF}`, true);
 
   if (doGHRelease) {
-    const files = process.env.GH_RELEASE_FILES
-      ? `--assets ${process.env.GH_RELEASE_FILES}`
-      : '';
+    const files = process.env.GH_RELEASE_FILES ? `--assets ${process.env.GH_RELEASE_FILES}` : '';
 
     execSync(`yarn polkadot-exec-ghrelease --draft ${files} --yes`);
   }
 }
 
-function loopFunc (fn) {
+function loopFunc(fn) {
   if (fs.existsSync('packages')) {
-    fs
-      .readdirSync('packages')
-      .filter((dir) => {
+    fs.readdirSync('packages')
+      .filter(dir => {
         const pkgDir = path.join(process.cwd(), 'packages', dir);
 
-        return fs.statSync(pkgDir).isDirectory() &&
+        return (
+          fs.statSync(pkgDir).isDirectory() &&
           fs.existsSync(path.join(pkgDir, 'package.json')) &&
-          fs.existsSync(path.join(pkgDir, 'build'));
+          fs.existsSync(path.join(pkgDir, 'build'))
+        );
       })
-      .forEach((dir) => {
+      .forEach(dir => {
         process.chdir(path.join('packages', dir));
         fn();
         process.chdir('../..');

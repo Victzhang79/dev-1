@@ -8,6 +8,6 @@
 export default (test: string): string => test;
 
 // eslint config test
-export function blah (): void {
+export function blah(): void {
   console.log('123');
 }

@@ -16,11 +16,22 @@
     "lint": "polkadot-dev-run-lint",
     "clean": "polkadot-dev-clean-build",
     "postinstall": "./packages/dev/scripts/polkadot-dev-yarn-only.js",
-    "test": "polkadot-dev-run-test --coverage"
+    "test": "polkadot-dev-run-test --coverage",
+    "pretty": "prettier --check . --write"
   },
   "devDependencies": {
     "@patract/dev": "workspace:packages/dev",
     "copyfiles": "^2.4.0"
   },
-  "version": "0.5.2"
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --pattern \"**/*.*(js|jsx|ts|tsx)\" --staged"
+    }
+  },
+  "version": "0.5.2",
+  "dependencies": {
+    "eslint-plugin-prettier": "latest",
+    "husky": "^4.3.0",
+    "pretty-quick": "^3.1.0"
+  }
 }

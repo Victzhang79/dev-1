@@ -6,7 +6,7 @@ import { EchoString } from './types';
 const A = 123;
 let count = 0;
 
-function doCallback (fn: (a: string) => string): void {
+function doCallback(fn: (a: string) => string): void {
   fn('test');
 }
 
@@ -16,7 +16,7 @@ function doCallback (fn: (a: string) => string): void {
 export const echo = (value: EchoString, start = 0, end?: number): string => {
   count++;
 
-  doCallback((a) => a);
+  doCallback(a => a);
 
   return `${count}: ${A}: ${value}`.substr(start, end);
 };

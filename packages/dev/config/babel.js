@@ -4,27 +4,26 @@
 // ordering here important
 /* eslint-disable sort-keys */
 
-function resolver (input) {
+function resolver(input) {
   return Array.isArray(input)
     ? input
-      .filter((plugin) => !!plugin)
-      .map((plugin) =>
-        Array.isArray(plugin)
-          ? [require.resolve(plugin[0]), plugin[1]]
-          : require.resolve(plugin)
-      )
+        .filter(plugin => !!plugin)
+        .map(plugin => (Array.isArray(plugin) ? [require.resolve(plugin[0]), plugin[1]] : require.resolve(plugin)))
     : require.resolve(input);
 }
 
 module.exports = {
   presets: resolver([
-    ['@babel/preset-env', {
-      modules: 'commonjs',
-      targets: {
-        browsers: '>0.25% and last 2 versions and not ie 11 and not OperaMini all',
-        node: '10'
+    [
+      '@babel/preset-env',
+      {
+        modules: 'commonjs',
+        targets: {
+          browsers: '>0.25% and last 2 versions and not ie 11 and not OperaMini all',
+          node: '10'
+        }
       }
-    }],
+    ],
     '@babel/preset-typescript',
     ['@babel/preset-react', { runtime: 'automatic' }]
   ]),

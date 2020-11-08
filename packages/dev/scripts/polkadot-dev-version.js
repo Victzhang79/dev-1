@@ -13,19 +13,15 @@ const { type } = require('yargs')
       type: 'string'
     }
   })
-  .strict()
-  .argv;
+  .strict().argv;
 
 const execSync = require('./execSync');
 
-function updateDependencies (dependencies, others, version) {
-  return Object
-    .entries(dependencies)
+function updateDependencies(dependencies, others, version) {
+  return Object.entries(dependencies)
     .sort((a, b) => a[0].localeCompare(b[0]))
     .reduce((result, [key, value]) => {
-      result[key] = others.includes(key) && value !== '*'
-        ? `^${version}`
-        : value;
+      result[key] = others.includes(key) && value !== '*' ? `^${version}` : value;
 
       return result;
     }, {});
@@ -39,9 +35,9 @@ execSync(`yarn version ${type === 'pre' ? 'prerelease' : type}`);
 if (fs.existsSync('packages')) {
   const packages = fs
     .readdirSync('packages')
-    .map((dir) => path.join(process.cwd(), 'packages', dir, 'package.json'))
-    .filter((pkgPath) => fs.existsSync(pkgPath))
-    .map((pkgPath) => [pkgPath, JSON.parse(fs.readFileSync(pkgPath, 'utf8'))]);
+    .map(dir => path.join(process.cwd(), 'packages', dir, 'package.json'))
+    .filter(pkgPath => fs.existsSync(pkgPath))
+    .map(pkgPath => [pkgPath, JSON.parse(fs.readFileSync(pkgPath, 'utf8'))]);
   const others = packages.map(([, json]) => json.name);
   const { version } = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'));
 
@@ -49,7 +45,9 @@ if (fs.existsSync('packages')) {
     const updated = Object.keys(json).reduce((result, key) => {
       if (key === 'version') {
         result[key] = version;
-      } else if (['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'resolutions'].includes(key)) {
+      } else if (
+        ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies', 'resolutions'].includes(key)
+      ) {
         result[key] = updateDependencies(json[key], others, version);
       } else {
         result[key] = json[key];
