@@ -14,8 +14,7 @@ const argv = require('yargs')
       type: 'boolean'
     }
   })
-  .strict()
-  .argv;
+  .strict().argv;
 
 console.log('$ polkadot-dev-run-lint', process.argv.slice(2).join(' '));
 
