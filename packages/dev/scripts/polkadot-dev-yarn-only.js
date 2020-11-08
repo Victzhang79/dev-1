@@ -16,7 +16,7 @@ console.error(
   )
 );
 console.error(`
-    Technical explanation: All the projects in the ${chalk.bold('@polkadot')} family use
+    Technical explanation: All the projects in the ${chalk.bold('@patract')} family use
     yarn workspaces, along with hoisting of dependencies. Currently only
     yarn supports package.json workspaces, hence the limitation.
 

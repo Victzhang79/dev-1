@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "polkadot-dev-build-ts && (cd packages/dev && copyfiles config/* scripts/* build)",
-    "build:release": "polkadot-ci-ghact-build --skip-beta",
+    "build:release": "polkadot-ci-ghact-build",
     "docs": "polkadot-dev-build-docs",
     "lint": "polkadot-dev-run-lint",
     "clean": "polkadot-dev-clean-build",
@@ -19,8 +19,8 @@
     "test": "polkadot-dev-run-test --coverage"
   },
   "devDependencies": {
-    "@polkadot/dev": "workspace:packages/dev",
+    "@patract/dev": "workspace:packages/dev",
     "copyfiles": "^2.4.0"
   },
-  "version": "0.59.19"
+  "version": "0.5.0"
 }

@@ -104,6 +104,8 @@ function gitBump () {
   const [version, tag] = currentVersion.split('-');
   const [,, patch] = version.split('.');
 
+  console.log(version, tag, patch, currentVersion, argv['skip-beta']);
+
   if (tag) {
     // if we have a beta version, just continue the stream of betas
     execSync('yarn polkadot-dev-version --type pre');
@@ -134,7 +136,7 @@ function gitPush () {
     if (changes.includes(`## ${version}`)) {
       doGHRelease = true;
     } else if (version.endsWith('.1')) {
-      throw new Error(`Unable to release, no CHANGELOG entry for ${version}`);
+      console.error(`Unable to release, no CHANGELOG entry for ${version}`);
     }
   }
 
