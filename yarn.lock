@@ -1797,6 +1797,7 @@ __metadata:
     madge: ^3.12.0
     minimatch: ^3.0.4
     mkdirp: ^1.0.4
+    prettier: ^2.1.2
     pretty-quick: ^3.1.0
     react: ^17.0.1
     rimraf: ^3.0.2
@@ -8813,7 +8814,6 @@ fsevents@^1.2.7:
     copyfiles: ^2.4.0
     eslint-plugin-prettier: latest
     husky: ^4.3.0
-    prettier: ^2.1.2
     pretty-quick: ^3.1.0
   languageName: unknown
   linkType: soft
