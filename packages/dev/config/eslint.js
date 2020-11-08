@@ -21,9 +21,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react/recommended',
-    'prettier',
-    'prettier/react',
-    'prettier/'
+    'plugin:prettier/recommended'
   ],
   overrides: [
     {
@@ -50,20 +48,17 @@ module.exports = {
     indent: 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/indent': 'off',
-    // rules from semistandard (don't include it, has standard dep version mismatch)
-    semi: [2, 'always'],
-    'no-extra-semi': 2,
     // specific overrides
     'default-param-last': [0], // conflicts with TS version (this one doesn't allow TS ?)
     'react/prop-types': [0], // this is a completely broken rule
     'object-curly-newline': [
-      'error',
+      1,
       {
         ImportDeclaration: { minProperties: 2048 }
       }
     ],
     'padding-line-between-statements': [
-      'error',
+      1,
       { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
       { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] },
       { blankLine: 'always', prev: '*', next: 'block-like' },
@@ -77,13 +72,13 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'error',
     'react/jsx-sort-props': [
-      2,
+      1,
       {
         noSortAlphabetically: false
       }
     ],
     'sort-destructure-keys/sort-destructure-keys': [
-      2,
+      1,
       {
         caseSensitive: true
       }

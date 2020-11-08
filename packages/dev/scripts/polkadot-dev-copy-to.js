@@ -29,7 +29,7 @@ execSync('yarn build');
 
 // map across what is available and copy it
 fs.readdirSync('packages')
-  .map(dir => {
+  .map((dir) => {
     const pkgPath = path.join(process.cwd(), 'packages', dir);
 
     return [pkgPath, path.join(pkgPath, 'package.json')];

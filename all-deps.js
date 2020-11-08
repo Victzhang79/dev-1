@@ -69,7 +69,7 @@ function findPackages(dir) {
   }
 
   fs.readdirSync(pkgsDir)
-    .filter(entry => {
+    .filter((entry) => {
       const full = path.join(pkgsDir, entry);
 
       return (
@@ -78,7 +78,7 @@ function findPackages(dir) {
         fs.existsSync(path.join(full, 'package.json'))
       );
     })
-    .forEach(dir => {
+    .forEach((dir) => {
       const full = path.join(pkgsDir, dir);
 
       paths.push(full);
@@ -88,7 +88,7 @@ function findPackages(dir) {
 
 console.log('Extracting');
 fs.readdirSync('.')
-  .filter(name => {
+  .filter((name) => {
     return !['.', '..'].includes(name) && fs.existsSync(packageJson(name));
   })
   .sort()
