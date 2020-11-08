@@ -28,7 +28,7 @@
       "pre-commit": "pretty-quick --pattern \"**/*.*(js|jsx|ts|tsx)\" --staged"
     }
   },
-  "version": "0.5.2",
+  "version": "0.5.3",
   "dependencies": {
     "eslint-plugin-prettier": "latest",
     "husky": "^4.3.0",
