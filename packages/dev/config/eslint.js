@@ -21,7 +21,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react/recommended',
-    'plugin:prettier/recommended'
+    'prettier',
+    'prettier/react',
+    'prettier/'
   ],
   overrides: [
     {
@@ -52,9 +54,7 @@ module.exports = {
     semi: [2, 'always'],
     'no-extra-semi': 2,
     // specific overrides
-    'arrow-parens': ['error', 'always'],
     'default-param-last': [0], // conflicts with TS version (this one doesn't allow TS ?)
-    'jsx-quotes': ['error', 'prefer-single'],
     'react/prop-types': [0], // this is a completely broken rule
     'object-curly-newline': [
       'error',
