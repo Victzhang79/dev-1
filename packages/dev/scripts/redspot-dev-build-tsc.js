@@ -56,3 +56,7 @@ main().catch(error => {
   console.error(error);
   process.exit(-1);
 });
+
+const a = aw => {
+  2;
+};
