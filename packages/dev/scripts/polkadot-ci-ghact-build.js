@@ -134,7 +134,7 @@ function gitPush () {
     if (changes.includes(`## ${version}`)) {
       doGHRelease = true;
     } else if (version.endsWith('.1')) {
-      throw new Error(`Unable to release, no CHANGELOG entry for ${version}`);
+      console.error(`Unable to release, no CHANGELOG entry for ${version}`);
     }
   }
 

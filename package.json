@@ -19,8 +19,8 @@
     "test": "polkadot-dev-run-test --coverage"
   },
   "devDependencies": {
-    "@polkadot/dev": "workspace:packages/dev",
+    "@patract/dev": "workspace:packages/dev",
     "copyfiles": "^2.4.0"
   },
-  "version": "0.59.19"
+  "version": "0.3.0"
 }
