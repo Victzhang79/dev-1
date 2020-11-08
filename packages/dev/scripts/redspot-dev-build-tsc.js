@@ -9,13 +9,13 @@ const fs = require('fs');
 const path = require('path');
 
 const CPX = ['css', 'gif', 'hbs', 'jpg', 'js', 'png', 'svg', 'd.ts', 'json']
-  .map(ext => `src/**/*.${ext}`)
+  .map((ext) => `src/**/*.${ext}`)
   .concat('package.json');
 
 console.log('$ redspot-dev-build-tsc', process.argv.slice(2).join(' '));
 
 function copyFiles(dir) {
-  [...CPX].forEach(src => copySync(src, `../../build/${dir}/src`));
+  [...CPX].forEach((src) => copySync(src, `../../build/${dir}/src`));
 }
 
 function buildOtherfile(dir) {
@@ -39,7 +39,7 @@ function main() {
 
   const dirs = fs
     .readdirSync('.')
-    .filter(dir => fs.statSync(dir).isDirectory() && fs.existsSync(path.join(process.cwd(), dir, 'src')));
+    .filter((dir) => fs.statSync(dir).isDirectory() && fs.existsSync(path.join(process.cwd(), dir, 'src')));
 
   for (const dir of dirs) {
     process.chdir(dir);
@@ -52,11 +52,7 @@ function main() {
   process.chdir('..');
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.error(error);
   process.exit(-1);
 });
-
-const a = aw => {
-  2;
-};

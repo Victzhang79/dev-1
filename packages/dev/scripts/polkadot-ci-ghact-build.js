@@ -59,7 +59,7 @@ function npmPublish() {
   }
 
   rimraf.sync('build/package.json');
-  ['LICENSE', 'README.md', 'package.json'].forEach(file => copySync(file, 'build'));
+  ['LICENSE', 'README.md', 'package.json'].forEach((file) => copySync(file, 'build'));
 
   process.chdir('build');
 
@@ -159,7 +159,7 @@ skip-checks: true"`);
 function loopFunc(fn) {
   if (fs.existsSync('packages')) {
     fs.readdirSync('packages')
-      .filter(dir => {
+      .filter((dir) => {
         const pkgDir = path.join(process.cwd(), 'packages', dir);
 
         return (
@@ -168,7 +168,7 @@ function loopFunc(fn) {
           fs.existsSync(path.join(pkgDir, 'build'))
         );
       })
-      .forEach(dir => {
+      .forEach((dir) => {
         process.chdir(path.join('packages', dir));
         fn();
         process.chdir('../..');
